@@ -1,26 +1,74 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* Preclinic design tokens (from Figma). shadcn reads these CSS variables. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --radius: 8px; /* rounded-md = 6px (Figma border-md) */
+
+  --background: #f5f6f8; /* Brand/Light */
+  --foreground: #0a1b39; /* Grey/Grey-900 */
+  --card: #ffffff;
+  --card-foreground: #0a1b39;
+  --popover: #ffffff;
+  --popover-foreground: #0a1b39;
+  --primary: #2e37a4; /* Brand/Primary */
+  --primary-foreground: #ffffff;
+  --secondary: #f5f6f8;
+  --secondary-foreground: #0a1b39;
+  --muted: #f5f6f8;
+  --muted-foreground: #6c7688; /* Grey/Grey-500 */
+  --accent: #f5f6f8;
+  --accent-foreground: #0a1b39;
+  --destructive: #dc2626;
+  --border: #e7e8eb; /* Transparent/Grey-transparent */
+  --input: #e7e8eb;
+  --ring: #2e37a4;
 }
 
 @theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Figma-specific tokens */
+  --color-brand-light: #f5f6f8;
+  --color-grey-900: #0a1b39;
+  --color-grey-500: #6c7688;
+  --color-grey-300: #9da4b0;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-card: 20px; /* Figma border-xl */
+
+  --shadow-field: 0 1px 0.5px rgb(0 0 0 / 0.05); /* Figma "Shadow Default" */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
 }
