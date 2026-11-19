@@ -1,0 +1,5 @@
+/* Add these lines INSIDE the existing `@theme inline { ... }` block of app/globals.css */
+  --color-success: #21c45d;
+  --color-warning: #f59f0a;
+  --color-alert: #ef4343;
+  --color-sidebar: #f7fafc;

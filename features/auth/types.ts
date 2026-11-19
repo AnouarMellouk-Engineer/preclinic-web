@@ -2,6 +2,8 @@ export type AuthResponse = { accessToken: string };
 
 export type LoginPayload = { email: string; password: string };
 
+export type SetPasswordPayload = { token: string; password: string };
+
 export type RegisterClinicPayload = {
   clinic: {
     name: string;

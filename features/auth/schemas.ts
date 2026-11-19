@@ -13,6 +13,10 @@ export const loginSchema = z.object({
 });
 export type LoginValues = z.infer<typeof loginSchema>;
 
+// Invited staff: one field only.
+export const activateSchema = z.object({ password });
+export type ActivateValues = z.infer<typeof activateSchema>;
+
 // Step 1 of the register flow = the Figma "Register" frame.
 export const ownerSchema = z
   .object({

@@ -7,6 +7,7 @@ import { ApiError } from "@/lib/api/client";
 import { authApi } from "./api";
 import { DEFAULT_TIMEZONE, HOME_BY_ROLE, WEB_ROLES } from "./constants";
 import {
+  activateSchema,
   loginSchema,
   registerClinicSchema,
   type LoginValues,
@@ -70,6 +71,47 @@ export async function loginAction(input: LoginValues): Promise<ActionResult> {
       ok: false,
       message: toMessage(error, {
         401: "Invalid credentials, or your account isn't activated yet.",
+      }),
+    };
+  }
+}
+
+/** Invited doctor / receptionist sets their first password from the e-mailed link. */
+export async function activateAccountAction(input: {
+  token: string;
+  password: string;
+}): Promise<ActionResult> {
+  const parsed = activateSchema.safeParse({ password: input.password });
+  if (!parsed.success || !input.token)
+    return { ok: false, message: "Please check the form and try again." };
+
+  try {
+    const response = await authApi.setPassword({
+      token: input.token,
+      password: parsed.data.password,
+    });
+
+    // If the API returns a token, sign the user in and send them to their dashboard.
+    const accessToken = response?.accessToken;
+    const user = parseToken(accessToken);
+    if (
+      accessToken &&
+      user &&
+      WEB_ROLES.includes(user.role as (typeof WEB_ROLES)[number])
+    ) {
+      await createSession(accessToken, user, false);
+      return {
+        ok: true,
+        redirectTo: HOME_BY_ROLE[user.role as keyof typeof HOME_BY_ROLE],
+      };
+    }
+    // Otherwise the account is active: let them sign in with the new password.
+    return { ok: true, redirectTo: "/login" };
+  } catch (error) {
+    return {
+      ok: false,
+      message: toMessage(error, {
+        400: "This activation link is invalid, expired or already used. Ask your clinic owner for a new invitation.",
       }),
     };
   }

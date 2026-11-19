@@ -1,0 +1,19 @@
+
+/* ------------------------------------------------------------------ */
+/* Dashboard theme (Figma "Dashboard / Patients" frames).              */
+/* Applied through `body:has(.dashboard-theme)` so portals (dialogs)   */
+/* rendered under <body> inherit it too. APPEND to app/globals.css.    */
+/* ------------------------------------------------------------------ */
+.dashboard-theme,
+body:has(.dashboard-theme) {
+  --radius: 10px;
+  --background: #f8fafc;
+  --foreground: #344256; /* Figma "Inactive" text */
+  --muted: #f1f5f9;
+  --muted-foreground: #65758b; /* Figma placeholder text */
+  --accent: #f1f5f9;
+  --primary: #007af5;
+  --ring: #007af5;
+  --border: #e1e7ef;
+  --input: #e1e7ef;
+}

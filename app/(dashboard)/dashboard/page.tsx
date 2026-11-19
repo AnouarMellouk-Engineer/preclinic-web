@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { logoutAction } from "@/features/auth/actions";
 import { getSession } from "@/features/auth/session";
 
-// Placeholder to test the auth flow. Replace with the real role-based dashboards.
+// Placeholder for the doctor / receptionist dashboards. Owners live in /owner.
 export default async function DashboardPage() {
   const session = await getSession();
   if (!session) redirect("/login");
+  if (session.user.role === "CLINIC_OWNER") redirect("/owner/doctors");
 
   return (
     <main className="mx-auto flex min-h-screen max-w-xl flex-col items-start justify-center gap-4 p-6">
