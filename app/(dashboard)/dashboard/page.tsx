@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { logoutAction } from "@/features/auth/actions";
 import { getSession } from "@/features/auth/session";
 
-// Placeholder for the doctor / receptionist dashboards. Owners live in /owner.
+// Placeholder for the receptionist dashboard. Owners live in /owner, doctors in /doctor.
 export default async function DashboardPage() {
   const session = await getSession();
   if (!session) redirect("/login");
   if (session.user.role === "CLINIC_OWNER") redirect("/owner/doctors");
+  if (session.user.role === "DOCTOR") redirect("/doctor/dashboard");
+  if (session.user.role === "RECEPTIONIST") redirect("/reception");
 
   return (
     <main className="mx-auto flex min-h-screen max-w-xl flex-col items-start justify-center gap-4 p-6">

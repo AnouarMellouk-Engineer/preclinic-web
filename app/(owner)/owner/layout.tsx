@@ -1,3 +1,4 @@
+// app/(owner)/owner/layout.tsx
 import { Suspense } from "react";
 
 import { OwnerShell } from "@/features/owner/components/owner-shell";

@@ -12,9 +12,9 @@ export const WEB_ROLES = [
   "RECEPTIONIST",
 ] as const satisfies readonly Role[];
 
-/** Where each role lands after login. Split these later (/doctor, /reception, ...). */
+/** Where each role lands after login. */
 export const HOME_BY_ROLE: Record<(typeof WEB_ROLES)[number], string> = {
   CLINIC_OWNER: "/owner/doctors",
-  DOCTOR: "/dashboard",
+  DOCTOR: "/doctor/dashboard",
   RECEPTIONIST: "/dashboard",
 };

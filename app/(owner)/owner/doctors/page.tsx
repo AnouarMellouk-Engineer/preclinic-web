@@ -1,3 +1,4 @@
+// app/(owner)/owner/doctors/page.tsx
 import type { Metadata } from "next";
 import { Stethoscope } from "lucide-react";
 

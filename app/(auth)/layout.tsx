@@ -1,7 +1,11 @@
 import { Logo } from "@/components/shared/logo";
 import { AuthHero } from "@/features/auth/components/auth-hero";
 
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div className="grid min-h-screen bg-brand-light lg:grid-cols-2">
       <AuthHero />
@@ -13,7 +17,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </div>
         </main>
         <footer className="pb-6 text-center text-sm leading-[21px] text-grey-900">
-          Copyright @2025 - Preclinic
+          Copyright @2026 - Preclinic
         </footer>
       </div>
     </div>
